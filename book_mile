@@ -1,21 +1,37 @@
 #! /usr/bin/sh
+#
+# Copyright (c) 2020, Keita Kitaura
+# All rights reserved.
+#
+# $Id: $
+#
+# github page: https://github.com/Index700/bookmile
 
-# url=$1				# 
+
+# url=$1				
 
 # url=./url
 
 usage (){
     echo "book_mile [OPTION] 
-    -n \"URL\" - Add the book from Amazon link
+    -n \"URL\" - Add new book from Amazon link
     -l - List books 
-    -h - Show this help"
+    -h - Show this help
+    
+    --- Not complete --- 
+    -k KEYWORD - add the book keyword
+    -r NUMBUER - change status how much you read the book
+    -s [paper, kindle, borrow, want] - change the book status"
+   
     exit
 }
 
 list(){
-    cat ~/bof/unix/bookmile/book_list| less
-    # less ~/bof/unix/bookmile/book_list
+    less ~/bof/unix/bookmile/book_list
 }
+
+
+#main
 while getopts lhn: OPT
 do
  case $OPT in
@@ -31,7 +47,7 @@ done; shift `expr $OPTIND - 1`
 if [ -n "$FLG_N" ]; then
 wget -O "/tmp/data_url" $URL
 sed -e 's/|/\/\//g' /tmp/data_url >/tmp/temp_url
-python3 book_info.py /tmp/temp_url >>~/bof/unix/bookmile/book_list
+python3 ~/bof/unix/bookmile/book_info.py /tmp/temp_url >>~/bof/unix/bookmile/book_list
 
 rm /tmp/temp_url /tmp/data_url 
 fi 

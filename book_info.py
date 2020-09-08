@@ -1,4 +1,10 @@
 #! /usr/bin/python3
+# Copyright (c) 2020, Keita Kitaura
+# All rights reserved.
+#
+# $Id: $
+#
+# github page: https://github.com/Index700/bookmile
 
 import re
 import sys
